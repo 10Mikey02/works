@@ -5,107 +5,207 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
     
+    <!-- 丸くてかわいいモダンなWebフォントを読み込み -->
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+    
     <style>
-        /* --- CSS: ここに見た目の設定を書きます --- */
-
-        /* 1. 全体の設定 */
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            font-family: "Helvetica Neue", Arial, sans-serif;
-            overflow-x: hidden; /* 横揺れ防止 */
+        /* カラーパレットの設定 */
+        :root {
+            --bg-color: #fff9fa;       /* 背景色：ほんのりピンクがかった白 */
+            --text-color: #5c5557;     /* 文字色：優しいダークブラウン */
+            --accent-color: #ff9cbd;   /* アクセント：かわいいピンク */
+            --card-bg: #ffffff;        /* カードの背景：白 */
         }
 
-        /* 2. 背景動画の設定 */
-        #video-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* 画面いっぱいに広げる */
-            z-index: -1; /* コンテンツの背後に配置 */
-        }
-
-        /* 3. ヘッダー（メニュー）の設定 */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 30px 50px;
+        * {
             box-sizing: border-box;
-            z-index: 100;
-        }
-
-        nav ul {
-            list-style: none;
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: flex-end; /* 右寄せ */
-            gap: 30px; /* メニュー間の余白 */
         }
 
-        nav ul li a {
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            font-size: 14px;
-            letter-spacing: 0.1em;
-            transition: 0.3s;
-            text-shadow: 1px 1px 5px rgba(0,0,0,0.3); /* 文字を読みやすく */
-        }
-
-        nav ul li a:hover {
-            color: #ccc; /* マウスを乗せた時の色 */
-        }
-
-        /* 4. 真ん中のメインテキスト */
-        .main-content {
+        body {
+            /* 日本語と英語で丸みのあるフォントを指定 */
+            font-family: 'Quicksand', 'M PLUS Rounded 1c', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            padding: 20px;
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
-            color: white;
+        }
+
+        /* 全体の幅と中央寄せ */
+        .container {
+            max-width: 550px;
+            width: 100%;
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        /* アイコンと名前の部分 */
+        .profile {
             text-align: center;
+            margin-bottom: 40px;
         }
 
-        .main-content h1 {
-            font-size: 4rem;
-            margin: 0;
-            text-shadow: 0 0 20px rgba(0,0,0,0.5);
+        .profile-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent-color);
+            box-shadow: 0 8px 20px rgba(255, 156, 189, 0.3);
+            margin-bottom: 15px;
         }
 
-        /* スマホ用の調整 */
-        @media (max-width: 768px) {
-            header {
-                padding: 20px;
-            }
-            nav ul {
-                gap: 15px;
-            }
-            nav ul li a {
-                font-size: 10px;
-            }
-            .main-content h1 {
-                font-size: 2rem;
-            }
+        .profile h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .profile .job-title {
+            font-size: 0.95rem;
+            color: #8c8486;
+        }
+
+        /* 各セクションのカードデザイン */
+        .card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 35px 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+        }
+
+        .card h2 {
+            font-size: 1.4rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* ご依頼セクション特有のデザイン */
+        .price-tag {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(255, 156, 189, 0.4);
+        }
+
+        .features {
+            list-style-type: none;
+            margin-top: 20px;
+            background-color: var(--bg-color);
+            padding: 20px;
+            border-radius: 16px;
+        }
+
+        .features li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+
+        .features li:last-child {
+            margin-bottom: 0;
+        }
+
+        .features li::before {
+            content: '✨';
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 1rem;
+        }
+
+        /* 連絡先ボタン */
+        .contact-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            padding: 16px;
+            border-radius: 30px;
+            font-weight: bold;
+            margin-top: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 15px rgba(255, 156, 189, 0.4);
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 156, 189, 0.6);
         }
     </style>
 </head>
 <body>
 
-    <video id="video-bg" autoplay muted loop playsinline>
-        <source src="bg-video.mp4" type="video/mp4">
-    </video>
+<div class="container">
+    
+    <!-- =========================
+         プロフィール（アイコン・名前）
+    ========================== -->
+    <div class="profile">
+        <!-- ▼ アイコン画像（同じ階層に icon.jpg を置いてください） ▼ -->
+        <img src="icon.jpg" alt="My Icon" class="profile-icon">
+        
+        <!-- ▼ お名前 ▼ -->
+        <h1>あなたのお名前</h1>
+        
+        <!-- ▼ 肩書き ▼ -->
+        <p class="job-title">Illustrator / Creator</p>
+    </div>
 
-    <header>
-        <nav>
-            <ul>
-                <li><a href="#">WORK</a></li>
-                <li><a href="#">PROFILE</a></li>
-                <li><a href="#">NEWS</a></li>
-                <li><a href="#">FAQ</a></li>
-                <li><a
+    <!-- =========================
+         自己紹介セクション
+    ========================== -->
+    <div class="card">
+        <h2>🧸 About Me</h2>
+        <p>
+            はじめまして！ご覧いただきありがとうございます。<br>
+            かわいくてシンプルなデザインやイラストを制作しています。<br>
+            見ている人が少しあたたかい気持ちになれるような作品作りを心がけています。
+        </p>
+    </div>
+
+    <!-- =========================
+         ご依頼セクション
+    ========================== -->
+    <div class="card">
+        <h2>💌 Commissions</h2>
+        <div class="price-tag">お見積り目安：3,000円〜</div>
+        <p>
+            個人・商用問わず、ご依頼をお受けしております。<br>
+            クライアント様のご要望に寄り添った制作をいたします！
+        </p>
+        
+        <ul class="features">
+            <li><strong>ご予算相談可能です</strong><br>無理のない範囲で、柔軟に対応させていただきます。</li>
+            <li><strong>金額に応じたクオリティ調整</strong><br>ご提示いただいた金額に応じて、書き込み量や全体的なクオリティをアップグレードすることが可能です！</li>
+            <li>まずはお見積りだけでも大歓迎です。</li>
+        </ul>
+        
+        <!-- ▼ 連絡先リンク（TwitterのDMリンクやメールアドレス、GoogleフォームのURLなどに変更してください） ▼ -->
+        <a href="https://twitter.com/あなたのID" target="_blank" class="contact-btn">ご依頼・ご相談はこちら</a>
+    </div>
+
+</div>
+
+</body>
+</html>
