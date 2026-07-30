@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
     
-    <!-- 丸くてかわいいモダンなWebフォントを読み込み -->
-    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+    <!-- すっきりとモダンなWebフォントを読み込み -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
     
     <style>
-        /* カラーパレットの設定 */
+        /* カラーパレットの設定（落ち着いた水色テーマ） */
         :root {
-            --bg-color: #fff9fa;       /* 背景色：ほんのりピンクがかった白 */
-            --text-color: #5c5557;     /* 文字色：優しいダークブラウン */
-            --accent-color: #ff9cbd;   /* アクセント：かわいいピンク */
+            --bg-color: #f0f4f8;       /* 背景色：淡いブルーグレー */
+            --text-color: #334155;     /* 文字色：落ち着いたダークグレー */
+            --accent-color: #5ba4cf;   /* アクセント：爽やかで落ち着いた水色 */
             --card-bg: #ffffff;        /* カードの背景：白 */
         }
 
@@ -24,8 +24,7 @@
         }
 
         body {
-            /* 日本語と英語で丸みのあるフォントを指定 */
-            font-family: 'Quicksand', 'M PLUS Rounded 1c', sans-serif;
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.7;
@@ -45,78 +44,94 @@
         /* アイコンと名前の部分 */
         .profile {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 45px;
         }
 
         .profile-icon {
-            width: 120px;
-            height: 120px;
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid var(--accent-color);
-            box-shadow: 0 8px 20px rgba(255, 156, 189, 0.3);
+            border: 3px solid #e2e8f0;
+            box-shadow: 0 8px 20px rgba(91, 164, 207, 0.15);
             margin-bottom: 15px;
         }
 
         .profile h1 {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 700;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
+            letter-spacing: 0.05em;
         }
 
         .profile .job-title {
-            font-size: 0.95rem;
-            color: #8c8486;
+            font-size: 0.9rem;
+            color: #64748b;
+            font-weight: 500;
+            letter-spacing: 0.05em;
         }
 
         /* 各セクションのカードデザイン */
         .card {
             background: var(--card-bg);
-            border-radius: 24px;
+            border-radius: 12px;
             padding: 35px 30px;
             margin-bottom: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            border: 1px solid #e2e8f0;
             transition: transform 0.3s ease;
         }
 
         .card:hover {
-            transform: translateY(-3px);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
         }
 
         .card h2 {
-            font-size: 1.4rem;
-            color: var(--accent-color);
-            margin-bottom: 15px;
+            font-size: 1.25rem;
+            color: var(--text-color);
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            font-weight: 700;
+        }
+
+        /* 見出しの左側に水色のアクセントライン */
+        .card h2::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 20px;
+            background-color: var(--accent-color);
+            margin-right: 12px;
+            border-radius: 2px;
         }
 
         /* ご依頼セクション特有のデザイン */
         .price-tag {
             display: inline-block;
-            background: var(--accent-color);
-            color: white;
-            padding: 6px 18px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 12px rgba(255, 156, 189, 0.4);
+            background: rgba(91, 164, 207, 0.1);
+            color: var(--accent-color);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 20px;
         }
 
         .features {
             list-style-type: none;
             margin-top: 20px;
-            background-color: var(--bg-color);
+            background-color: #f8fafc;
             padding: 20px;
-            border-radius: 16px;
+            border-radius: 8px;
+            border: 1px solid #f1f5f9;
         }
 
         .features li {
             position: relative;
-            padding-left: 24px;
-            margin-bottom: 12px;
+            padding-left: 18px;
+            margin-bottom: 14px;
             font-size: 0.95rem;
         }
 
@@ -124,12 +139,27 @@
             margin-bottom: 0;
         }
 
+        /* リストのドットを水色に */
         .features li::before {
-            content: '✨';
+            content: '';
             position: absolute;
             left: 0;
-            top: 0;
-            font-size: 1rem;
+            top: 10px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+        }
+
+        .features strong {
+            color: var(--text-color);
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .features span {
+            color: #64748b;
+            font-size: 0.9rem;
         }
 
         /* 連絡先ボタン */
@@ -140,17 +170,16 @@
             background: var(--accent-color);
             color: white;
             text-decoration: none;
-            padding: 16px;
-            border-radius: 30px;
-            font-weight: bold;
+            padding: 14px;
+            border-radius: 8px;
+            font-weight: 600;
             margin-top: 25px;
             transition: all 0.3s ease;
-            box-shadow: 0 6px 15px rgba(255, 156, 189, 0.4);
+            letter-spacing: 0.05em;
         }
 
         .contact-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 156, 189, 0.6);
+            background-color: #4992bd;
         }
     </style>
 </head>
@@ -162,25 +191,24 @@
          プロフィール（アイコン・名前）
     ========================== -->
     <div class="profile">
-        <!-- ▼ アイコン画像（同じ階層に icon.jpg を置いてください） ▼ -->
-        <img src="icon.jpg" alt="My Icon" class="profile-icon">
+        <!-- ▼ アイコン画像 ▼ -->
+        <img src="icon.jpg" alt="Profile Icon" class="profile-icon">
         
         <!-- ▼ お名前 ▼ -->
         <h1>あなたのお名前</h1>
         
         <!-- ▼ 肩書き ▼ -->
-        <p class="job-title">Illustrator / Creator</p>
+        <p class="job-title">Motion Graphics Designer</p>
     </div>
 
     <!-- =========================
          自己紹介セクション
     ========================== -->
     <div class="card">
-        <h2>🧸 About Me</h2>
+        <h2>About Me</h2>
         <p>
-            はじめまして！ご覧いただきありがとうございます。<br>
-            かわいくてシンプルなデザインやイラストを制作しています。<br>
-            見ている人が少しあたたかい気持ちになれるような作品作りを心がけています。
+            はじめまして。モーショングラフィックスデザイナーとして活動しています。<br>
+            シンプルで洗練されたアニメーションや、伝えたいメッセージを視覚的に魅力的に届ける映像制作を心がけています。
         </p>
     </div>
 
@@ -188,20 +216,28 @@
          ご依頼セクション
     ========================== -->
     <div class="card">
-        <h2>💌 Commissions</h2>
+        <h2>Commissions</h2>
         <div class="price-tag">お見積り目安：3,000円〜</div>
-        <p>
-            個人・商用問わず、ご依頼をお受けしております。<br>
-            クライアント様のご要望に寄り添った制作をいたします！
+        <p style="margin-bottom: 15px; color: #475569;">
+            個人・商用問わず、映像制作やアニメーションのご依頼をお受けしております。用途に合わせた最適なご提案をいたします。
         </p>
         
         <ul class="features">
-            <li><strong>ご予算相談可能です</strong><br>無理のない範囲で、柔軟に対応させていただきます。</li>
-            <li><strong>金額に応じたクオリティ調整</strong><br>ご提示いただいた金額に応じて、書き込み量や全体的なクオリティをアップグレードすることが可能です！</li>
-            <li>まずはお見積りだけでも大歓迎です。</li>
+            <li>
+                <strong>ご予算相談可能です</strong>
+                <span>無理のない範囲で、柔軟に対応させていただきます。</span>
+            </li>
+            <li>
+                <strong>金額に応じたクオリティ調整</strong>
+                <span>ご提示いただいた金額に応じて、アニメーションの動きの緻密さや全体のクオリティをアップグレードすることが可能です。</span>
+            </li>
+            <li>
+                <strong>お見積りのみも歓迎</strong>
+                <span>まずはお気軽にご相談ください。</span>
+            </li>
         </ul>
         
-        <!-- ▼ 連絡先リンク（TwitterのDMリンクやメールアドレス、GoogleフォームのURLなどに変更してください） ▼ -->
+        <!-- ▼ 連絡先リンク ▼ -->
         <a href="https://twitter.com/あなたのID" target="_blank" class="contact-btn">ご依頼・ご相談はこちら</a>
     </div>
 
