@@ -161,7 +161,7 @@
         #home {
             position: relative;
             height: 100vh;
-            width: 100%;
+            width: 100vw;
             overflow: hidden;
             background-color: #000;
             display: flex;
@@ -169,22 +169,29 @@
             align-items: center;
         }
 
-        /* Vimeoの埋め込みラッパー */
+        /* PC版：画面全体を完全に覆う設定（余白なし） */
         .hero-video-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        /* 1920x1080 (16:9) の比率を保ちながら、画面サイズより少しだけ拡大して黒帯を隠す */
+        .hero-video-iframe {
             position: absolute;
             top: 50%;
             left: 50%;
             width: 100vw;
-            height: 100vh;
-            transform: translate(-50%, -50%);
-            z-index: 1;
-            /* 動画を誤ってクリックしないように設定 */
-            pointer-events: none;
-        }
-
-        .hero-video-iframe {
-            width: 100%;
-            height: 100%;
+            height: 56.25vw;      /* 100vw * (9/16) */
+            min-height: 100vh;
+            min-width: 177.77vh;  /* 100vh * (16/9) */
+            /* scale(1.05) で数%拡大し、Vimeo特有の端の余白を確実に枠外へ押し出す */
+            transform: translate(-50%, -50%) scale(1.05);
             border: none;
         }
 
@@ -455,15 +462,24 @@
                 display: block; 
             }
 
+            /* スマホ版：見切れないようにレイアウトを再調整 */
             .hero-video-wrapper {
                 position: relative; 
-                top: 0;
-                left: 0;
-                transform: none;
                 width: 100%;
                 height: auto; 
-                /* スマホでは動画の全体が確実に表示されるよう16:9のアスペクト比を指定 */
                 aspect-ratio: 16 / 9; 
+                overflow: hidden;
+            }
+
+            .hero-video-iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                min-width: 0;
+                min-height: 0;
+                transform: none; /* スマホでは拡大しない */
             }
 
             .scroll-indicator {
@@ -525,10 +541,9 @@
         </div>
     </header>
 
-    <!-- 3. ホーム画面 (デモリール動画 - Vimeo埋め込み) -->
+    <!-- 3. ホーム画面 (デモリール動画 - Vimeo画面全体) -->
     <section id="home">
         <div class="hero-video-wrapper">
-            <!-- ?background=1 などをつけることで、自動再生・ミュート・ループ化され、UIが非表示になります -->
             <iframe src="https://player.vimeo.com/video/1244188348?background=1&autoplay=1&loop=1&muted=1" 
                     frameborder="0" 
                     allow="autoplay; fullscreen; picture-in-picture" 
