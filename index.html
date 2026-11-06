@@ -48,12 +48,12 @@
         }
 
         .intro-icon {
-            /* アイコンを確実に画面の中央に配置 */
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 80px;
-            height: 80px;
+            /* アイコンサイズを3倍(80px -> 240px)に変更 */
+            width: 240px;
+            height: 240px;
             background-color: transparent; 
             border-radius: 50%;
             background-image: url('Icon_mikey.png');
@@ -164,7 +164,6 @@
             height: 100vh;
             width: 100%;
             overflow: hidden;
-            /* スマホで動画全体を表示(contain)した際の余白を自然に見せる黒背景 */
             background-color: #000;
             display: flex;
             justify-content: center;
@@ -172,34 +171,15 @@
         }
 
         .hero-video {
-            /* 動画を確実に中央へ配置 */
             position: absolute;
             top: 50%;
             left: 50%;
             width: 100vw;
             height: 100vh;
             transform: translate(-50%, -50%);
-            /* PC版では画面全体を覆う */
             object-fit: cover; 
             z-index: 1;
-            filter: brightness(0.35); 
-        }
-
-        .hero-content {
-            position: relative;
-            text-align: center;
-            color: #fff;
-            z-index: 2;
-            opacity: 0;
-            /* JSで translate(0, 0) に書き換えるための初期状態 */
-            transform: translateY(20px);
-            transition: opacity 1s ease 1s, transform 1s ease 1s; 
-        }
-
-        .hero-content h1 {
-            font-size: 4rem;
-            letter-spacing: 5px;
-            font-weight: 300;
+            /* 暗くするフィルターを削除 */
         }
 
         /* SCROLL インジケーターと矢印アニメーション */
@@ -217,6 +197,8 @@
             z-index: 2;
             opacity: 0;
             animation: fadeIn 1s ease 1.5s forwards;
+            /* 動画を明るくしたため、文字が見えやすいように薄く影をつける */
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5); 
         }
 
         .scroll-indicator span {
@@ -230,6 +212,7 @@
             border-bottom: 2px solid #fff;
             transform: rotate(45deg);
             animation: bounceArrow 2s infinite;
+            box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
 
         @keyframes fadeIn {
@@ -351,6 +334,7 @@
         .step-content p {
             font-size: 0.95rem;
             color: var(--accent-color);
+            line-height: 1.8;
         }
 
         /* =========================================
@@ -444,13 +428,37 @@
             .hamburger.active span:nth-child(2) { opacity: 0; }
             .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background-color:#fff; }
 
-            /* スマホ版 動画のリサイズ (トリミングせず全体を表示) */
+            /* スマホ版 動画レイアウト変更 (画面上部に配置し自然なレイアウトへ) */
+            #home {
+                height: auto;
+                padding-top: 70px; /* ヘッダー分の余白 */
+                padding-bottom: 40px;
+                display: block; /* フレックスを解除して自然に流す */
+            }
+
             .hero-video {
+                position: relative; /* 絶対配置を解除 */
+                top: 0;
+                left: 0;
+                transform: none;
+                width: 100%;
+                height: auto; /* 動画の比率を維持 */
                 object-fit: contain; 
             }
 
-            .hero-content h1 {
-                font-size: 2.5rem;
+            .scroll-indicator {
+                position: relative;
+                bottom: auto;
+                left: 0;
+                transform: none;
+                justify-content: center;
+                margin-top: 30px;
+            }
+
+            /* アイコンサイズ (スマホ環境での調整が必要な場合はここへ) */
+            .intro-icon {
+                width: 150px; /* スマホでは少し控えめなサイズに調整 */
+                height: 150px;
             }
 
             .flow-step {
@@ -492,10 +500,6 @@
         <video autoplay loop muted playsinline class="hero-video">
             <source src="Mikey.mp4" type="video/mp4">
         </video>
-        <div class="hero-content" id="hero-content">
-            <h1>Mikey</h1>
-            <p>Motion Graphics Designer</p>
-        </div>
         <!-- スクロールインジケーター -->
         <div class="scroll-indicator">
             <span>SCROLL</span>
@@ -517,123 +521,4 @@
             </div>
             <div class="work-item fade-in-up">
                 <img src="https://via.placeholder.com/600x338" alt="Work 3">
-                <div class="work-overlay"><h3>Project Name 3</h3></div>
-            </div>
-            <div class="work-item fade-in-up">
-                <img src="https://via.placeholder.com/600x338" alt="Work 4">
-                <div class="work-overlay"><h3>Project Name 4</h3></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 5. 納品までの流れ -->
-    <section id="flow">
-        <h2 class="section-title fade-in-up">Flow</h2>
-        <div class="flow-container">
-            <div class="flow-step fade-in-up">
-                <div class="step-number">01</div>
-                <div class="step-content">
-                    <h3>ヒアリング</h3>
-                    <p>目的やターゲット、ご希望のテイストを丁寧にヒアリングし、映像の方向性を決定します。</p>
-                </div>
-            </div>
-            <div class="flow-step fade-in-up">
-                <div class="step-number">02</div>
-                <div class="step-content">
-                    <h3>撮影・制作</h3>
-                    <p>構成案に沿って撮影、または提供素材をもとに動画編集・アニメーション制作を行います。</p>
-                </div>
-            </div>
-            <div class="flow-step fade-in-up">
-                <div class="step-number">03</div>
-                <div class="step-content">
-                    <h3>確認・修正</h3>
-                    <p>初稿を提出し、ご要望に合わせた修正（カラーコレクションやテロップの微調整など）を行います。</p>
-                </div>
-            </div>
-            <div class="flow-step fade-in-up">
-                <div class="step-number">04</div>
-                <div class="step-content">
-                    <h3>納品</h3>
-                    <p>最終確認後、ご希望のフォーマット（mp4, movなど）でデータを納品いたします。</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 6. お問い合わせ -->
-    <section id="contact">
-        <h2 class="section-title fade-in-up">Contact</h2>
-        <div class="contact-container fade-in-up">
-            <p>お仕事のご依頼、ご相談はお気軽にお問い合わせください。</p>
-            <a href="mailto:your-email@example.com" class="btn">メールで問い合わせる</a>
-        </div>
-    </section>
-
-    <footer>
-        <p>© 2026 10Mikey02. All Rights Reserved.</p>
-    </footer>
-
-    <!-- JavaScript (アニメーション・UI制御) -->
-    <script>
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const intro = document.getElementById('intro');
-                intro.style.opacity = '0';
-                
-                setTimeout(() => {
-                    intro.style.display = 'none';
-                    // 中央配置されたテキスト要素をフェードイン表示
-                    const heroContent = document.getElementById('hero-content');
-                    heroContent.style.opacity = '1';
-                    heroContent.style.transform = 'translateY(0)';
-                }, 600);
-            }, 1000);
-        });
-
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-        const navItems = document.querySelectorAll('.nav-links a');
-
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            hamburger.classList.toggle('active');
-        });
-
-        navItems.forEach(item => {
-            item.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                hamburger.classList.remove('active');
-            });
-        });
-
-        const fadeElements = document.querySelectorAll('.fade-in-up');
-        
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.2
-        };
-
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        fadeElements.forEach(el => observer.observe(el));
-    </script>
-</body>
-</html>
+                <div class="work-overlay
