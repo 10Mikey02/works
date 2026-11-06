@@ -53,10 +53,8 @@
         .intro-icon {
             width: 80px;
             height: 80px;
-            /* 背景色を透過させる場合は transparent に */
             background-color: transparent; 
             border-radius: 50%;
-            /* 修正点：アイコン画像のパスを Icon_mikey.png に変更 */
             background-image: url('Icon_mikey.png');
             background-size: cover;
             background-position: center;
@@ -122,7 +120,6 @@
             transition: color 0.3s ease;
         }
 
-        /* ホバー時のCSSアニメーション（下線が伸びる） */
         .nav-links a::after {
             content: '';
             position: absolute;
@@ -138,7 +135,6 @@
             width: 100%;
         }
 
-        /* Hamburger Menu (スマホ用) */
         .hamburger {
             display: none;
             cursor: pointer;
@@ -168,21 +164,22 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            /* PCの大画面でも1920pxを上限にする場合は以下の2行を有効化（通常は不要） */
+            /* max-width: 1920px; */
+            /* margin: 0 auto; */
         }
 
         .hero-video {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            transform: translate(-50%, -50%);
-            object-fit: cover;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* 1920x1080の比率を保ちながら画面全体を覆う最適な指定 */
+            object-fit: cover; 
             z-index: -1;
-            /* 動画を目立たせるため少し暗くするオーバーレイ */
-            filter: brightness(0.6); 
+            /* ご要望に合わせて動画をさらに暗く設定 (0.6 -> 0.35) */
+            filter: brightness(0.35); 
         }
 
         .hero-content {
@@ -191,13 +188,61 @@
             z-index: 1;
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity 1s ease 1s, transform 1s ease 1s; /* イントロ後にフェードイン */
+            transition: opacity 1s ease 1s, transform 1s ease 1s; 
         }
 
         .hero-content h1 {
             font-size: 4rem;
             letter-spacing: 5px;
             font-weight: 300;
+        }
+
+        /* SCROLL インジケーターと矢印アニメーション */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            z-index: 2;
+            opacity: 0;
+            /* ヒーローコンテンツの後にふわっと表示 */
+            animation: fadeIn 1s ease 1.5s forwards;
+        }
+
+        .scroll-indicator span {
+            font-weight: 300;
+        }
+
+        .scroll-arrow {
+            width: 10px;
+            height: 10px;
+            border-right: 2px solid #fff;
+            border-bottom: 2px solid #fff;
+            transform: rotate(45deg);
+            /* 下にピョコピョコ動くアニメーション */
+            animation: bounceArrow 2s infinite;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        @keyframes bounceArrow {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) rotate(45deg);
+            }
+            40% {
+                transform: translateY(-8px) rotate(45deg);
+            }
+            60% {
+                transform: translateY(-4px) rotate(45deg);
+            }
         }
 
         /* =========================================
@@ -217,7 +262,6 @@
             font-weight: 300;
         }
 
-        /* スクロール連動のフェードインアニメーション */
         .fade-in-up {
             opacity: 0;
             transform: translateY(40px);
@@ -334,7 +378,6 @@
             letter-spacing: 2px;
             border: 1px solid var(--primary-color);
             transition: all 0.3s ease;
-            /* ホバー時のアニメーション差別化 */
             position: relative;
             overflow: hidden;
             z-index: 1;
@@ -400,7 +443,6 @@
                 z-index: 1001;
             }
 
-            /* ハンバーガーメニューがアクティブな時の×印 */
             .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); background-color:#fff; }
             .hamburger.active span:nth-child(2) { opacity: 0; }
             .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background-color:#fff; }
@@ -422,14 +464,13 @@
 </head>
 <body>
 
-    <!-- 1. オープニング画面 (1秒後にフェードアウト) -->
+    <!-- 1. オープニング画面 -->
     <div id="intro">
         <div class="intro-icon"></div>
     </div>
 
     <!-- 2. ヘッダー / メニューバー -->
     <header id="header">
-        <!-- 修正点：ロゴテキストを 10Mikey02 に変更 -->
         <a href="#home" class="logo">10Mikey02</a>
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
@@ -446,14 +487,17 @@
 
     <!-- 3. ホーム画面 (デモリール動画) -->
     <section id="home">
-        <!-- 修正点：デモリール動画のパスを Mikey.mp4 に変更 -->
         <video autoplay loop muted playsinline class="hero-video">
             <source src="Mikey.mp4" type="video/mp4">
         </video>
         <div class="hero-content" id="hero-content">
-            <!-- 修正点：動画内容に合わせてテキストを変更 -->
             <h1>Mikey</h1>
             <p>Motion Graphics Designer</p>
+        </div>
+        <!-- 追加：スクロールインジケーター（SCROLL文字 ＋ 動く下矢印） -->
+        <div class="scroll-indicator">
+            <span>SCROLL</span>
+            <div class="scroll-arrow"></div>
         </div>
     </section>
 
@@ -530,13 +574,11 @@
 
     <!-- JavaScript (アニメーション・UI制御) -->
     <script>
-        // 1. オープニング画面の制御 (1秒後にフェードアウト)
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const intro = document.getElementById('intro');
                 intro.style.opacity = '0';
                 
-                // フェードアウト完了後にDOMから非表示にし、ヒーローコンテンツをフェードイン
                 setTimeout(() => {
                     intro.style.display = 'none';
                     document.getElementById('hero-content').style.opacity = '1';
@@ -545,7 +587,6 @@
             }, 1000);
         });
 
-        // 2. ヘッダーのスクロール検知（背景色の変更）
         const header = document.getElementById('header');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
@@ -555,7 +596,6 @@
             }
         });
 
-        // 3. スマホ用ハンバーガーメニューの開閉
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
         const navItems = document.querySelectorAll('.nav-links a');
@@ -572,7 +612,6 @@
             });
         });
 
-        // 4. スクロール連動フェードインアニメーション (Intersection Observer)
         const fadeElements = document.querySelectorAll('.fade-in-up');
         
         const observerOptions = {
