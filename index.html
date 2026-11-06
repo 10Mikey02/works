@@ -239,6 +239,11 @@
             font-weight: 300;
         }
 
+        /* Contactセクションのタイトルの余白を狭くする */
+        #contact .section-title {
+            margin-bottom: 20px; 
+        }
+
         .fade-in-up {
             opacity: 0;
             transform: translateY(40px);
@@ -332,6 +337,11 @@
             font-size: 0.95rem;
             color: var(--accent-color);
             line-height: 1.8;
+        }
+
+        /* スマホ用テキストの初期非表示 */
+        .sp-text {
+            display: none;
         }
 
         /* =========================================
@@ -472,6 +482,14 @@
                 margin-bottom: 10px;
             }
 
+            /* スマホ版テキストの切り替え */
+            .pc-text {
+                display: none;
+            }
+            .sp-text {
+                display: block;
+            }
+
             .contact-email {
                 font-size: 1rem;
             }
@@ -544,14 +562,20 @@
                 <div class="step-number">01</div>
                 <div class="step-content">
                     <h3>ご相談</h3>
-                    <p>曲やイメージ、ご予算と納期をお知らせください。</p>
+                    <!-- PC版テキスト -->
+                    <p class="pc-text">曲やイメージ、ご予算と納期をお知らせください。</p>
+                    <!-- スマホ版テキスト（改行あり） -->
+                    <p class="sp-text">曲やイメージ、ご予算と納期を<br>お知らせください。</p>
                 </div>
             </div>
             <div class="flow-step fade-in-up">
                 <div class="step-number">02</div>
                 <div class="step-content">
                     <h3>ヒアリング</h3>
-                    <p>目的やターゲット、ご希望のテイストを丁寧にヒアリングし、映像の方向性を決めます。<br>その後絵コンテを制作しビジュアルの確認をします。</p>
+                    <!-- PC版テキスト -->
+                    <p class="pc-text">目的やターゲット、ご希望のテイストを丁寧にヒアリングし、映像の方向性を決めます。<br>その後絵コンテを制作しビジュアルの確認をします。</p>
+                    <!-- スマホ版テキスト（改行あり） -->
+                    <p class="sp-text">目的やターゲット、ご希望のテイストを<br>丁寧にヒアリングし、映像の方向性を<br>決めます。<br>その後絵コンテを制作し、<br>ビジュアルの確認をします。</p>
                 </div>
             </div>
             <div class="flow-step fade-in-up">
@@ -575,10 +599,8 @@
     <section id="contact">
         <h2 class="section-title fade-in-up">Contact</h2>
         <div class="contact-container fade-in-up">
-            <!-- 追加されたメールアドレス -->
             <p class="contact-email">contact@10mikey02.party</p>
             <p class="contact-desc">お仕事のご依頼、ご相談はお気軽にお問い合わせください。</p>
-            <!-- リンク先を修正 -->
             <a href="mailto:contact@10mikey02.party" class="btn">メールで問い合わせる</a>
         </div>
     </section>
