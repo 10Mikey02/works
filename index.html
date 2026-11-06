@@ -521,4 +521,119 @@
             </div>
             <div class="work-item fade-in-up">
                 <img src="https://via.placeholder.com/600x338" alt="Work 3">
-                <div class="work-overlay
+                <div class="work-overlay"><h3>Project Name 3</h3></div>
+            </div>
+            <div class="work-item fade-in-up">
+                <img src="https://via.placeholder.com/600x338" alt="Work 4">
+                <div class="work-overlay"><h3>Project Name 4</h3></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. 納品までの流れ -->
+    <section id="flow">
+        <h2 class="section-title fade-in-up">Flow</h2>
+        <div class="flow-container">
+            <div class="flow-step fade-in-up">
+                <div class="step-number">01</div>
+                <div class="step-content">
+                    <h3>ご相談</h3>
+                    <p>曲やイメージ、ご予算と納期をお知らせください。</p>
+                </div>
+            </div>
+            <div class="flow-step fade-in-up">
+                <div class="step-number">02</div>
+                <div class="step-content">
+                    <h3>ヒアリング</h3>
+                    <p>目的やターゲット、ご希望のテイストを丁寧にヒアリングし、映像の方向性を決めます。<br>その後絵コンテを制作しビジュアルの確認をします。</p>
+                </div>
+            </div>
+            <div class="flow-step fade-in-up">
+                <div class="step-number">03</div>
+                <div class="step-content">
+                    <h3>確認・修正</h3>
+                    <p>完成イメージを数枚確認します。</p>
+                </div>
+            </div>
+            <div class="flow-step fade-in-up">
+                <div class="step-number">04</div>
+                <div class="step-content">
+                    <h3>納品</h3>
+                    <p>最終確認後、ご希望のフォーマット(MP4,MOVなど)で納品いたします。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. お問い合わせ -->
+    <section id="contact">
+        <h2 class="section-title fade-in-up">Contact</h2>
+        <div class="contact-container fade-in-up">
+            <p>お仕事のご依頼、ご相談はお気軽にお問い合わせください。</p>
+            <a href="mailto:your-email@example.com" class="btn">メールで問い合わせる</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 10Mikey02. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript (アニメーション・UI制御) -->
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const intro = document.getElementById('intro');
+                intro.style.opacity = '0';
+                
+                setTimeout(() => {
+                    intro.style.display = 'none';
+                }, 600);
+            }, 1000);
+        });
+
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        const navItems = document.querySelectorAll('.nav-links a');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+
+        const fadeElements = document.querySelectorAll('.fade-in-up');
+        
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.2
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        fadeElements.forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
