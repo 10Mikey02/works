@@ -43,14 +43,15 @@
             width: 100vw;
             height: 100vh;
             background-color: var(--primary-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
             z-index: 9999;
             transition: opacity 0.6s cubic-bezier(0.8, 0, 0.2, 1);
         }
 
         .intro-icon {
+            /* アイコンを確実に画面の中央に配置 */
+            position: absolute;
+            top: 50%;
+            left: 50%;
             width: 80px;
             height: 80px;
             background-color: transparent; 
@@ -58,15 +59,17 @@
             background-image: url('Icon_mikey.png');
             background-size: cover;
             background-position: center;
-            opacity: 0;
-            transform: scale(0.8);
             animation: fadeInScale 0.8s ease forwards;
         }
 
         @keyframes fadeInScale {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
             100% {
                 opacity: 1;
-                transform: scale(1);
+                transform: translate(-50%, -50%) scale(1);
             }
         }
 
@@ -161,32 +164,34 @@
             height: 100vh;
             width: 100%;
             overflow: hidden;
+            /* スマホで動画全体を表示(contain)した際の余白を自然に見せる黒背景 */
+            background-color: #000;
             display: flex;
             justify-content: center;
             align-items: center;
-            /* PCの大画面でも1920pxを上限にする場合は以下の2行を有効化（通常は不要） */
-            /* max-width: 1920px; */
-            /* margin: 0 auto; */
         }
 
         .hero-video {
+            /* 動画を確実に中央へ配置 */
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            /* 1920x1080の比率を保ちながら画面全体を覆う最適な指定 */
+            top: 50%;
+            left: 50%;
+            width: 100vw;
+            height: 100vh;
+            transform: translate(-50%, -50%);
+            /* PC版では画面全体を覆う */
             object-fit: cover; 
-            z-index: -1;
-            /* ご要望に合わせて動画をさらに暗く設定 (0.6 -> 0.35) */
+            z-index: 1;
             filter: brightness(0.35); 
         }
 
         .hero-content {
+            position: relative;
             text-align: center;
             color: #fff;
-            z-index: 1;
+            z-index: 2;
             opacity: 0;
+            /* JSで translate(0, 0) に書き換えるための初期状態 */
             transform: translateY(20px);
             transition: opacity 1s ease 1s, transform 1s ease 1s; 
         }
@@ -211,7 +216,6 @@
             letter-spacing: 2px;
             z-index: 2;
             opacity: 0;
-            /* ヒーローコンテンツの後にふわっと表示 */
             animation: fadeIn 1s ease 1.5s forwards;
         }
 
@@ -225,7 +229,6 @@
             border-right: 2px solid #fff;
             border-bottom: 2px solid #fff;
             transform: rotate(45deg);
-            /* 下にピョコピョコ動くアニメーション */
             animation: bounceArrow 2s infinite;
         }
 
@@ -234,15 +237,9 @@
         }
 
         @keyframes bounceArrow {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0) rotate(45deg);
-            }
-            40% {
-                transform: translateY(-8px) rotate(45deg);
-            }
-            60% {
-                transform: translateY(-4px) rotate(45deg);
-            }
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) rotate(45deg); }
+            40% { transform: translateY(-8px) rotate(45deg); }
+            60% { transform: translateY(-4px) rotate(45deg); }
         }
 
         /* =========================================
@@ -447,6 +444,11 @@
             .hamburger.active span:nth-child(2) { opacity: 0; }
             .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background-color:#fff; }
 
+            /* スマホ版 動画のリサイズ (トリミングせず全体を表示) */
+            .hero-video {
+                object-fit: contain; 
+            }
+
             .hero-content h1 {
                 font-size: 2.5rem;
             }
@@ -494,7 +496,7 @@
             <h1>Mikey</h1>
             <p>Motion Graphics Designer</p>
         </div>
-        <!-- 追加：スクロールインジケーター（SCROLL文字 ＋ 動く下矢印） -->
+        <!-- スクロールインジケーター -->
         <div class="scroll-indicator">
             <span>SCROLL</span>
             <div class="scroll-arrow"></div>
@@ -581,8 +583,10 @@
                 
                 setTimeout(() => {
                     intro.style.display = 'none';
-                    document.getElementById('hero-content').style.opacity = '1';
-                    document.getElementById('hero-content').style.transform = 'translateY(0)';
+                    // 中央配置されたテキスト要素をフェードイン表示
+                    const heroContent = document.getElementById('hero-content');
+                    heroContent.style.opacity = '1';
+                    heroContent.style.transform = 'translateY(0)';
                 }, 600);
             }, 1000);
         });
