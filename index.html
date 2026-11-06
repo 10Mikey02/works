@@ -51,7 +51,6 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            /* アイコンサイズを3倍(80px -> 240px)に変更 */
             width: 240px;
             height: 240px;
             background-color: transparent; 
@@ -179,7 +178,6 @@
             transform: translate(-50%, -50%);
             object-fit: cover; 
             z-index: 1;
-            /* 暗くするフィルターを削除 */
         }
 
         /* SCROLL インジケーターと矢印アニメーション */
@@ -197,7 +195,6 @@
             z-index: 2;
             opacity: 0;
             animation: fadeIn 1s ease 1.5s forwards;
-            /* 動画を明るくしたため、文字が見えやすいように薄く影をつける */
             text-shadow: 0 2px 4px rgba(0,0,0,0.5); 
         }
 
@@ -346,7 +343,14 @@
             text-align: center;
         }
 
-        .contact-container p {
+        .contact-email {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .contact-desc {
             margin-bottom: 40px;
         }
 
@@ -428,21 +432,20 @@
             .hamburger.active span:nth-child(2) { opacity: 0; }
             .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background-color:#fff; }
 
-            /* スマホ版 動画レイアウト変更 (画面上部に配置し自然なレイアウトへ) */
             #home {
                 height: auto;
-                padding-top: 70px; /* ヘッダー分の余白 */
+                padding-top: 70px; 
                 padding-bottom: 40px;
-                display: block; /* フレックスを解除して自然に流す */
+                display: block; 
             }
 
             .hero-video {
-                position: relative; /* 絶対配置を解除 */
+                position: relative; 
                 top: 0;
                 left: 0;
                 transform: none;
                 width: 100%;
-                height: auto; /* 動画の比率を維持 */
+                height: auto; 
                 object-fit: contain; 
             }
 
@@ -455,9 +458,8 @@
                 margin-top: 30px;
             }
 
-            /* アイコンサイズ (スマホ環境での調整が必要な場合はここへ) */
             .intro-icon {
-                width: 150px; /* スマホでは少し控えめなサイズに調整 */
+                width: 150px; 
                 height: 150px;
             }
 
@@ -468,6 +470,10 @@
             
             .step-number {
                 margin-bottom: 10px;
+            }
+
+            .contact-email {
+                font-size: 1rem;
             }
         }
     </style>
@@ -569,8 +575,11 @@
     <section id="contact">
         <h2 class="section-title fade-in-up">Contact</h2>
         <div class="contact-container fade-in-up">
-            <p>お仕事のご依頼、ご相談はお気軽にお問い合わせください。</p>
-            <a href="mailto:your-email@example.com" class="btn">メールで問い合わせる</a>
+            <!-- 追加されたメールアドレス -->
+            <p class="contact-email">contact@10mikey02.party</p>
+            <p class="contact-desc">お仕事のご依頼、ご相談はお気軽にお問い合わせください。</p>
+            <!-- リンク先を修正 -->
+            <a href="mailto:contact@10mikey02.party" class="btn">メールで問い合わせる</a>
         </div>
     </section>
 
