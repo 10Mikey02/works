@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>10Mikey02 Portfolio</title>
+    <title>10Mikey02</title>
     <style>
         /* =========================================
            Base Settings & Variables
@@ -190,7 +190,6 @@
             height: 56.25vw;      /* 100vw * (9/16) */
             min-height: 100vh;
             min-width: 177.77vh;  /* 100vh * (16/9) */
-            /* scale(1.05) で数%拡大し、Vimeo特有の端の余白を確実に枠外へ押し出す */
             transform: translate(-50%, -50%) scale(1.05);
             border: none;
         }
@@ -462,7 +461,6 @@
                 display: block; 
             }
 
-            /* スマホ版：見切れないようにレイアウトを再調整 */
             .hero-video-wrapper {
                 position: relative; 
                 width: 100%;
@@ -479,7 +477,7 @@
                 height: 100%;
                 min-width: 0;
                 min-height: 0;
-                transform: none; /* スマホでは拡大しない */
+                transform: none;
             }
 
             .scroll-indicator {
@@ -544,7 +542,6 @@
     <!-- 3. ホーム画面 (デモリール動画 - Vimeo画面全体) -->
     <section id="home">
         <div class="hero-video-wrapper">
-            <!-- リンクのIDを 1244230756 に差し替え -->
             <iframe src="https://player.vimeo.com/video/1244230756?background=1&autoplay=1&loop=1&muted=1" 
                     frameborder="0" 
                     allow="autoplay; fullscreen; picture-in-picture" 
@@ -552,7 +549,6 @@
                     class="hero-video-iframe">
             </iframe>
         </div>
-        <!-- スクロールインジケーター -->
         <div class="scroll-indicator">
             <span>SCROLL</span>
             <div class="scroll-arrow"></div>
@@ -590,9 +586,7 @@
                 <div class="step-number">01</div>
                 <div class="step-content">
                     <h3>ご相談</h3>
-                    <!-- PC版テキスト -->
                     <p class="pc-text">曲やイメージ、ご予算と納期をお知らせください。</p>
-                    <!-- スマホ版テキスト（改行あり） -->
                     <p class="sp-text">曲やイメージ、ご予算と納期を<br>お知らせください。</p>
                 </div>
             </div>
@@ -600,9 +594,7 @@
                 <div class="step-number">02</div>
                 <div class="step-content">
                     <h3>ヒアリング</h3>
-                    <!-- PC版テキスト -->
                     <p class="pc-text">目的やターゲット、ご希望のテイストを丁寧にヒアリングし、映像の方向性を決めます。<br>その後絵コンテを制作しビジュアルの確認をします。</p>
-                    <!-- スマホ版テキスト（改行あり） -->
                     <p class="sp-text">目的やターゲット、ご希望のテイストを<br>丁寧にヒアリングし、映像の方向性を<br>決めます。<br>その後絵コンテを制作し、<br>ビジュアルの確認をします。</p>
                 </div>
             </div>
