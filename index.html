@@ -169,7 +169,6 @@
             align-items: center;
         }
 
-        /* PC版：画面全体を完全に覆う設定（余白なし） */
         .hero-video-wrapper {
             position: absolute;
             top: 0;
@@ -181,20 +180,18 @@
             overflow: hidden;
         }
 
-        /* 1920x1080 (16:9) の比率を保ちながら、画面サイズより少しだけ拡大して黒帯を隠す */
         .hero-video-iframe {
             position: absolute;
             top: 50%;
             left: 50%;
             width: 100vw;
-            height: 56.25vw;      /* 100vw * (9/16) */
+            height: 56.25vw;
             min-height: 100vh;
-            min-width: 177.77vh;  /* 100vh * (16/9) */
+            min-width: 177.77vh;
             transform: translate(-50%, -50%) scale(1.05);
             border: none;
         }
 
-        /* SCROLL インジケーターと矢印アニメーション */
         .scroll-indicator {
             position: absolute;
             bottom: 40px;
@@ -271,6 +268,37 @@
         /* =========================================
            Works Section (実績一覧)
         ========================================= */
+        /* タブデザイン */
+        .works-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .works-tab {
+            background-color: #fff;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            padding: 8px 24px;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .works-tab:hover {
+            background-color: #f0f0f0;
+        }
+
+        .works-tab.active {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        /* グリッドとアイテム */
         .works-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -284,6 +312,16 @@
             aspect-ratio: 16 / 9;
             background-color: #eee;
             cursor: pointer;
+            animation: fadeInItem 0.5s ease forwards;
+        }
+
+        .work-item.hidden {
+            display: none;
+        }
+
+        @keyframes fadeInItem {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         .work-item img {
@@ -303,10 +341,18 @@
             background: rgba(0,0,0,0.6);
             color: #fff;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             opacity: 0;
             transition: opacity 0.3s ease;
+        }
+
+        .work-overlay p {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+            color: #ccc;
         }
 
         .work-item:hover .work-overlay {
@@ -419,9 +465,7 @@
            Media Queries (スマホ対応)
         ========================================= */
         @media screen and (max-width: 768px) {
-            header {
-                padding: 15px 20px;
-            }
+            header { padding: 15px 20px; }
             
             .nav-links {
                 position: absolute;
@@ -436,20 +480,10 @@
                 transition: right 0.4s ease;
             }
 
-            .nav-links.active {
-                right: 0;
-            }
+            .nav-links.active { right: 0; }
+            .nav-links a { color: #fff !important; font-size: 1.2rem; }
 
-            .nav-links a {
-                color: #fff !important;
-                font-size: 1.2rem;
-            }
-
-            .hamburger {
-                display: flex;
-                z-index: 1001;
-            }
-
+            .hamburger { display: flex; z-index: 1001; }
             .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); background-color:#fff; }
             .hamburger.active span:nth-child(2) { opacity: 0; }
             .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background-color:#fff; }
@@ -489,30 +523,16 @@
                 margin-top: 30px;
             }
 
-            .intro-icon {
-                width: 150px; 
-                height: 150px;
-            }
-
-            .flow-step {
-                flex-direction: column;
-                align-items: flex-start;
-            }
+            .intro-icon { width: 150px; height: 150px; }
             
-            .step-number {
-                margin-bottom: 10px;
-            }
+            .works-tabs { gap: 10px; }
+            .works-tab { padding: 6px 16px; font-size: 0.8rem; }
 
-            .pc-text {
-                display: none;
-            }
-            .sp-text {
-                display: block;
-            }
-
-            .contact-email {
-                font-size: 1rem;
-            }
+            .flow-step { flex-direction: column; align-items: flex-start; }
+            .step-number { margin-bottom: 10px; }
+            .pc-text { display: none; }
+            .sp-text { display: block; }
+            .contact-email { font-size: 1rem; }
         }
     </style>
 </head>
@@ -558,22 +578,45 @@
     <!-- 4. 実績一覧 -->
     <section id="works">
         <h2 class="section-title fade-in-up">Works</h2>
+        
+        <!-- 絞り込みタブ -->
+        <div class="works-tabs fade-in-up">
+            <button class="works-tab active" data-filter="all">All</button>
+            <button class="works-tab" data-filter="mv">MV</button>
+            <button class="works-tab" data-filter="pv">PV</button>
+            <button class="works-tab" data-filter="original">Original Work</button>
+        </div>
+
+        <!-- ギャラリー -->
         <div class="works-grid">
-            <div class="work-item fade-in-up">
-                <img src="https://via.placeholder.com/600x338" alt="Work 1">
-                <div class="work-overlay"><h3>Project Name 1</h3></div>
+            <!-- data-category に "mv", "pv", "original" を指定することでフィルタリングされます -->
+            <div class="work-item fade-in-up" data-category="mv">
+                <img src="https://via.placeholder.com/600x338" alt="MV Work 1">
+                <div class="work-overlay">
+                    <p>MV</p>
+                    <h3>Music Video 1</h3>
+                </div>
             </div>
-            <div class="work-item fade-in-up">
-                <img src="https://via.placeholder.com/600x338" alt="Work 2">
-                <div class="work-overlay"><h3>Project Name 2</h3></div>
+            <div class="work-item fade-in-up" data-category="pv">
+                <img src="https://via.placeholder.com/600x338" alt="PV Work 1">
+                <div class="work-overlay">
+                    <p>PV</p>
+                    <h3>Promotion Video 1</h3>
+                </div>
             </div>
-            <div class="work-item fade-in-up">
-                <img src="https://via.placeholder.com/600x338" alt="Work 3">
-                <div class="work-overlay"><h3>Project Name 3</h3></div>
+            <div class="work-item fade-in-up" data-category="original">
+                <img src="https://via.placeholder.com/600x338" alt="Original Work 1">
+                <div class="work-overlay">
+                    <p>Original Work</p>
+                    <h3>My Artwork 1</h3>
+                </div>
             </div>
-            <div class="work-item fade-in-up">
-                <img src="https://via.placeholder.com/600x338" alt="Work 4">
-                <div class="work-overlay"><h3>Project Name 4</h3></div>
+            <div class="work-item fade-in-up" data-category="mv">
+                <img src="https://via.placeholder.com/600x338" alt="MV Work 2">
+                <div class="work-overlay">
+                    <p>MV</p>
+                    <h3>Music Video 2</h3>
+                </div>
             </div>
         </div>
     </section>
@@ -631,6 +674,7 @@
 
     <!-- JavaScript (アニメーション・UI制御) -->
     <script>
+        // オープニングアニメーション
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const intro = document.getElementById('intro');
@@ -642,6 +686,7 @@
             }, 1000);
         });
 
+        // ヘッダーのスクロール追従
         const header = document.getElementById('header');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
@@ -651,6 +696,7 @@
             }
         });
 
+        // スマホ用ハンバーガーメニュー
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
         const navItems = document.querySelectorAll('.nav-links a');
@@ -667,14 +713,13 @@
             });
         });
 
+        // フェードインアニメーション
         const fadeElements = document.querySelectorAll('.fade-in-up');
-        
         const observerOptions = {
             root: null,
             rootMargin: '0px',
             threshold: 0.2
         };
-
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -685,6 +730,30 @@
         }, observerOptions);
 
         fadeElements.forEach(el => observer.observe(el));
+
+        // Works フィルター機能 (タブの切り替え)
+        const filterTabs = document.querySelectorAll('.works-tab');
+        const workItems = document.querySelectorAll('.work-item');
+
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // タブのアクティブ状態をリセットして、クリックされたものをアクティブに
+                filterTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                const filterValue = tab.getAttribute('data-filter');
+                
+                // アイテムの表示・非表示を切り替え
+                workItems.forEach(item => {
+                    const itemCategory = item.getAttribute('data-category');
+                    if (filterValue === 'all' || filterValue === itemCategory) {
+                        item.classList.remove('hidden');
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>
