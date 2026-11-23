@@ -331,6 +331,15 @@
             transition: transform 0.5s ease;
         }
 
+        /* 画像全体を見切れずに表示する設定 */
+        .work-item.contain-img {
+            background-color: #000;
+        }
+
+        .work-item.contain-img img {
+            object-fit: contain;
+        }
+
         .work-item:hover img {
             transform: scale(1.05);
         }
@@ -709,7 +718,7 @@
                 </div>
             </a>
             <!-- PV: 国境なき医師団 -->
-            <a href="work-kokyou.html" class="work-item fade-in-up" data-category="pv">
+            <a href="work-kokyou.html" class="work-item contain-img fade-in-up" data-category="pv">
                 <img src="KOKYOU.jpg" alt="国境なき医師団">
                 <div class="work-overlay">
                     <p>PV</p>
