@@ -1,1 +1,225 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YUKI MIKU | 10Mikey02</title>
+    <style>
+        :root {
+            --primary-color: #1a1a1a;
+            --text-color: #333;
+            --bg-color: #fafafa;
+            --accent-color: #666;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            line-height: 1.8;
+        }
+
+        /* ヘッダー */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .back-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-link:hover {
+            opacity: 0.6;
+        }
+
+        /* メインコンテンツ */
+        main {
+            max-width: 900px;
+            margin: 120px auto 80px;
+            padding: 0 20px;
+        }
+
+        .work-category {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            color: var(--accent-color);
+            margin-bottom: 5px;
+        }
+
+        .work-title {
+            font-size: 2.2rem;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        /* メインビジュアル / 動画エリア */
+        .media-container {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background-color: #000;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .media-container img,
+        .media-container iframe {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: none;
+        }
+
+        /* 詳細情報ボックス */
+        .detail-box {
+            background: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            margin-bottom: 50px;
+        }
+
+        .detail-section {
+            margin-bottom: 30px;
+        }
+
+        .detail-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .detail-section h2 {
+            font-size: 1.1rem;
+            border-left: 4px solid var(--primary-color);
+            padding-left: 12px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .credit-list {
+            list-style: none;
+            font-size: 0.95rem;
+            color: var(--accent-color);
+        }
+
+        .credit-list li {
+            margin-bottom: 8px;
+        }
+
+        .credit-list strong {
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+
+        /* 戻るボタン */
+        .btn-wrapper {
+            text-align: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: var(--primary-color);
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 2px;
+            border: 1px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #fff;
+            color: var(--primary-color);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            background-color: var(--primary-color);
+            color: #fff;
+            font-size: 0.8rem;
+        }
+
+        @media screen and (max-width: 768px) {
+            header { padding: 15px 20px; }
+            main { margin-top: 90px; }
+            .work-title { font-size: 1.6rem; }
+            .detail-box { padding: 25px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">10Mikey02</a>
+        <a href="index.html#works" class="back-link">← Worksへ戻る</a>
+    </header>
+
+    <main>
+        <p class="work-category">PV / Promotion Video</p>
+        <h1 class="work-title">YUKI MIKU</h1>
+
+        <!-- サムネイル表示（YouTubeやVimeoの埋め込みiframeに差し替えることもできます） -->
+        <div class="media-container">
+            <img src="YUKI_MIKU.png" alt="YUKI MIKU">
+        </div>
+
+        <div class="detail-box">
+            <div class="detail-section">
+                <h2>Overview / 概要</h2>
+                <p>
+                    ここに動画の説明文や制作時のこだわり、コンセプトなどを記載します。<br>
+                    立体感のある2Dモーショングラフィックスと、雪ミクの世界観に合わせた色づくりを意識して制作しました。
+                </p>
+            </div>
+
+            <div class="detail-section">
+                <h2>Credit / 担当・使用ツール</h2>
+                <ul class="credit-list">
+                    <li><strong>Role:</strong> Direction / Motion Graphics / Composite</li>
+                    <li><strong>Tools:</strong> After Effects / Cinema 4D / Illustrator</li>
+                    <li><strong>Client:</strong> クライアント名（または自主制作）</li>
+                    <li><strong>Release:</strong> 2026</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="btn-wrapper">
+            <a href="index.html#works" class="btn">Works一覧に戻る</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2026 10Mikey02. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
