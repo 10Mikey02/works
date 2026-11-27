@@ -389,6 +389,17 @@
             border-bottom: 1px solid #eee;
         }
 
+        /* プロフィール丸アイコン */
+        .about-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+
         .about-header h3 {
             font-size: 1.8rem;
             letter-spacing: 2px;
@@ -639,6 +650,7 @@
             .works-tab { padding: 6px 16px; font-size: 0.8rem; }
 
             .about-container { padding: 25px 20px; }
+            .about-icon { width: 100px; height: 100px; }
             .tools-grid { grid-template-columns: 1fr; gap: 15px; }
             .sns-links a { flex-direction: column; align-items: flex-start; gap: 5px; }
 
@@ -674,7 +686,7 @@
         </div>
     </header>
 
- <!-- 3. ホーム画面 (デモリール動画 - Vimeo画面全体) -->
+    <!-- 3. ホーム画面 (デモリール動画 - Vimeo画面全体) -->
     <section id="home">
         <div class="hero-video-wrapper">
             <iframe src="https://player.vimeo.com/video/1250633832?background=1&autoplay=1&loop=1&muted=1" 
@@ -747,6 +759,7 @@
         <h2 class="section-title fade-in-up">About Me</h2>
         <div class="about-container fade-in-up">
             <div class="about-header">
+                <img src="Icon_mikey.png" alt="Mikey Icon" class="about-icon">
                 <h3>Mikey (まいきー)</h3>
                 <p>映像作家 : Motion Graphics Designer</p>
             </div>
@@ -767,7 +780,7 @@
                 <h4 class="about-section-title">映像に触れたきっかけ</h4>
                 <p>高校の時に出会った友達に影響を受け映像の世界へ。<br>
                 大学のオープンキャンパスで出会った師匠に憧れMVの世界へ。<br>
-                専門学校に進学し、現在は映像作家:Motion Graphics Designerとして活動中。</p>
+                専門学校に進学し映像を勉強し、現在は映像作家:Motion Graphics Designerとして活動している。</p>
 
                 <div class="sns-links">
                     <a href="https://twitter.com/10Mikey02" target="_blank" rel="noopener noreferrer">
@@ -917,4 +930,3 @@
     </script>
 </body>
 </html>
-
